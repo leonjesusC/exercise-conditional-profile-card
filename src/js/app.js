@@ -22,6 +22,7 @@ import "../style/index.css";
         city: null
     }
  */
+
 function render(variables = {}) {
   console.log("These are the current variables: ", variables);
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
@@ -31,13 +32,34 @@ function render(variables = {}) {
   if (variables.name == null || variables.lastname == null)
     namez = `<h1>Type Name / Last Name</h1>`;
 
+  /* INTENTO CON TERNARY OPERATORS (TODOS VAN DENTRO DE POSITIONZ) */
+
+  let tweety = `<li><a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>`;
+  variables.twitter == null
+    ? (tweety = `<li><a href="" style="pointer-events:none;"><i></i></a></li>`)
+    : tweety;
+
+  let gitty = `<li><a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a></li>`;
+  variables.github == null
+    ? (gitty = `<li><a href="" style="pointer-events:none;"><i></i></a></li>`)
+    : gitty;
+
+  let linky = `<li><a href="https://www.linkedin.com/in/${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>`;
+  variables.linkedin == null
+    ? (linky = `<li><a href="" style="pointer-events:none;"><i></i></a></li>`)
+    : linky;
+
+  let iggy = `<li><a href="https://www.instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>`;
+  variables.instagram == null
+    ? (iggy = `<li><a href="" style="pointer-events:none;"><i></i></a></li>`)
+    : iggy;
+
   let positionz = `<ul class=${variables.socialMediaPosition}>
-  <li><a href="${variables.twitter}"><i class="fab fa-twitter"></i></a></li>
-  <li><a href="${variables.github}"><i class="fab fa-github"></i></a></li>
-  <li><a href="${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>
-  <li><a href="${variables.instagram}"><i class="fab fa-instagram"></i></a></li>
-</ul>
-</div>`;
+                        ${tweety}
+                        ${gitty}
+                        ${linky}
+                        ${iggy}
+                    </ul>`;
 
   let rolypoly = `<h2>${variables.role}</h2>`;
   if (variables.role == null) rolypoly = `<h2>Select Role</h2>`;
@@ -48,13 +70,12 @@ function render(variables = {}) {
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          ${namez}
-          ${rolypoly}
-          ${locationz}
-          ${positionz}
-
-    `;
+            <img src="${variables.avatarURL}" class="photo" />
+                ${namez}
+                ${rolypoly}
+                ${locationz}
+                ${positionz}
+          </div>`;
 }
 
 /**
@@ -74,7 +95,7 @@ window.onload = function() {
     socialMediaPosition: "position-left",
     // social media usernames
     twitter: null,
-    github: "alesanchezr",
+    github: null,
     linkedin: null,
     instagram: null,
     name: null,
